@@ -20,5 +20,4 @@ for path, directories, files in os.walk(directory):
         if (organizer in file or seq > .75) and ".py" not in file:
             # moving files that match what we care about
             shutil.move(os.path.join(path,file), os.path.join(comp_folder,file)) 
-            
-   
+
