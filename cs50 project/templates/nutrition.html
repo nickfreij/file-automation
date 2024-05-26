@@ -1,0 +1,178 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Nutrition
+{% endblock %}
+
+{% block main %}
+
+<img src="/static/store.jpeg" id="nutritionpic">
+<br><br>
+<h1 id="nutrheading">Add your food and track your calories below!</h1>
+<br><br><br>
+<form action = "/nutrition/foodsearch" method = "get" id="nutr">
+    <br><br><br>
+    <input id = "food" name = "food" placeholder = "Search your food here" type = "text" required>
+    <button type ="submit">Search</button>
+</form>
+{% if nutrients %}
+<form action = "/nutrition" method = "post" id="foodenterform">
+<select id="mealid" name="mealid">
+  <option>Meal 1</option>
+  <option>Meal 2</option>
+  <option>Meal 3</option>
+  <option>Meal 4</option>
+  <option>Meal 5</option>
+  <option>Meal 6</option>
+  <option>Meal 7</option>
+  <option>Meal 8</option>
+  <option>Meal 9</option>
+  <option>Meal 10</option>
+</select>
+<input id="servingsizeamt" name="servingsizeamt" placeholder = "Serving Size" type = "text" required>
+<button type="submit" class="meal_add" id="meal_add">Add to Meal</button>
+<br><br><br>
+<div class="table-responsive">
+  <table class="table">
+    <caption>Food Search</caption>
+    <thead>
+      <tr>
+        <th scope="col">Food</th>
+        <th scope="col">Serving Size</th>
+        <th scope="col">Calories</th>
+        <th scope="col">Protein (g)</th>
+        <th scope="col">Carbohydrates (g)</th>
+        <th scope="col">Fats (g)</th>
+        <th scope="col">Sugar (g)</th>
+        <th scope="col">Fiber (g)</th>
+        <th scope="col">Add to Meal</th>
+      </tr>
+    </thead>
+      <tbody>
+        {% for nutrient in nutrients %}
+        <tr>
+          <td id="brandname">{{nutrient.get("Brandname")}} {{nutrient.get("Foodname")}}</td>
+          <td id="servingsize">{{nutrient.get("Servingsize")}}</td>
+          <td id="calories">{{nutrient.get("Calories")}}</td>
+          <td id="protein">{{nutrient.get("Protein")}}</td>
+          <td id="carbs">{{nutrient.get("Carbohydrates")}}</td>
+          <td id="fats">{{nutrient.get("Fats")}}</td>
+          <td id="sugars">{{nutrient.get("Sugars")}}</td>
+          <td id="fiber">{{nutrient.get("Fiber")}}</td>
+          <td>
+            <input type="hidden" name="brandname" value={{nutrient.get("Brandname")}}>
+            <input type="hidden" name="servingsize" value={{nutrient.get("Servingsize")}}>
+            <input type="hidden" name="calories" value={{nutrient.get("Calories")}}>
+            <input type="hidden" name="protein" value={{nutrient.get("Protein")}}>
+            <input type="hidden" name="carbs" value={{nutrient.get("Carbohydrates")}}>
+            <input type="hidden" name="fats" value={{nutrient.get("Fats")}}>
+            <input type="hidden" name="sugars" value={{nutrient.get("Sugars")}}>
+            <input type="hidden" name="fiber" value={{nutrient.get("Fiber")}}>
+            <input type="hidden" name="foodname" value={{nutrient.get("Foodname")}}>
+            <input type="hidden" name="ssunit" value={{nutrient.get("ssunit")}}>
+            <input type="radio" name="radiofoodadd" id="radiofoodadd"></button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+  </table>
+</form>
+</div>
+{% endif %}
+
+{% if meal_foods %}
+<div id="datechangeinfo">Choose your date</div>
+<form action = "/datechange" method = "post">
+  <!--the form will only take the info in the option if the name is in the select not option-->
+  <select name="datechange" id="datechange">
+    {% if thedate %}
+    <option id="thedate">{{thedate}}</option>
+    {% endif %}
+    <!-- make select for choosing the date and then take that form data to send to sql table to pick up date -->
+    {% for food_date in food_dates %}
+    <option id="datefromsql">{{food_date.date}}</option>
+    {% endfor %}
+
+  </select>
+
+  <button type="submit">Submit</button>
+
+</form>
+
+<div class="table-responsive">
+    {% for meal_number in meal_numbers %}
+        <table class="table" id="table">
+            <thead>
+                <tr>
+                  <th scope="col">{{meal_number.meal_id}}</th>
+                  <th scope="col">Totals:</th>
+              {% for meal_stat in meal_stats %}
+                {% if meal_stat.mealid == meal_number.meal_id %}
+                  <th scope="col">Calories: {{ meal_stat.totalcal }}</th>
+                  <th scope="col">Protein: {{ meal_stat.totalpro }}</th>
+                  <th scope="col">Carbohydrates: {{ meal_stat.totalcarbs }}</th>
+                  <th scope="col">Fats: {{ meal_stat.totalfats }}</th>
+                  <th scope="col">Sugars: {{ meal_stat.totalsugars }}</th>
+                  <th scope="col">Fiber: {{ meal_stat.totalfiber }}</th>
+                {% endif %}
+              {% endfor %}
+                </tr>
+                <tr>
+                  <th scope="col">Food</th>
+                  <th scope="col">Serving Size</th>
+                  <th scope="col">Calories</th>
+                  <th scope="col">Protein (g)</th>
+                  <th scope="col">Carbohydrates (g)</th>
+                  <th scope="col">Fats (g)</th>
+                  <th scope="col">Sugar (g)</th>
+                  <th scope="col">Fiber (g)</th>
+                </tr>
+              </thead>
+        {% for meal_food in meal_foods %}
+          {% if meal_food.meal_id == meal_number.meal_id %}
+              <tbody>
+                <tr>
+                  <td id="brn">{{meal_food.brandname}} {{meal_food.foodname}}</td>
+                  <td id="ssz">{{meal_food.servingsize}}</td>
+                  <td id="cal">{{meal_food.calories}}</td>
+                  <td id="pro">{{meal_food.protein}}</td>
+                  <td id="crb">{{meal_food.carbs}}</td>
+                  <td id="fat">{{meal_food.fats}}</td>
+                  <td id="sgr">{{meal_food.sugars}}</td>
+                  <td id="fbr">{{meal_food.fiber}}</td>
+                </tr>
+             </tbody>
+          {% endif %}
+        {% endfor %}
+        </table>
+     {% endfor %}
+</div>
+
+{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // go through all options in select menu not including the first one which is
+    dateSelect = document.querySelector('#datechange');
+        datechosen = document.querySelector('#thedate');
+        if (dateSelect) {
+          for (var i = 1; i < dateSelect.options.length; i++) {
+            var dateoption = dateSelect.options[i];
+            if (dateoption.text == datechosen.textContent) {
+                dateSelect.removeChild(dateoption);
+                break; // only want to remove one date, because the rest will be distinct per sql query in app.py
+            }
+          }
+        }
+
+    // when add meal, let user know
+    document.querySelector('#meal_add').onclick = function() {
+      if (parseFloat(document.querySelector('#servingsizeamt').value) > 0 && document.querySelector('input[name="radiofoodadd"]:checked')) {
+        alert('Meal added');                                              //check if selected
+      };
+    };
+  });
+</script>
+
+{% endblock %}

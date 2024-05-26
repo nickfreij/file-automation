@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+<br><br><br><br><br>
+<h1>"Success is not final, failure is not fatal: It is the courage to continue that counts." - Winston Churchill</h1>
+
+<video controls autoplay loop id="myVideo">
+    <!--source src="{{url_for('static', filename='kevin.mp4')}}" type="video/mp4"-->
+    <source src="/static/kevin.mp4" type="video/mp4">
+</video>
+<br><br><br><br>
+<div>
+
+<!-- Change volume of the video with JavaScript -->
+
+
+<!-- Button to pause/play the video with JavaScript -->
+<button id="pause_play">Pause</button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('#pause_play').onclick = function() {
+        var video = document.querySelector("#myVideo");
+        var btn = document.querySelector("#pause_play");
+        if (video.paused) {
+            video.play();
+            btn.innerHTML = "Pause";
+        }
+        else {
+            video.pause();
+            btn.innerHTML = "Play";
+        }
+    };
+});
+</script>
+{% endblock %}

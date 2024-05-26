@@ -1,0 +1,3 @@
+export OPENAI_API_KEY=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
+
+bought 10$ oct 1 2023

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Supplement
+{% endblock %}
+
+{% block main %}
+
+<img src="/static/supplement.jpg" id="supplementpic">
+
+<form action = "/supplement" method = "post">
+    <br><br>
+    <h1>Enter in a Supplement to learn if it is for you</h1>
+    <br><br><br>
+    <input id = "supp" name = "supp" placeholder = "Supplement Name" type = "text" required>
+    <button type = "submit">Ask</button>
+</form>
+
+<br><br><br>
+
+{% if gptresponse %}
+<div class="gptresponse">{{ gptresponse.choices[0].text }}</div>
+{% endif %}
+
+{% endblock %}

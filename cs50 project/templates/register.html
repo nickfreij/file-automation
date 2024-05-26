@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <h1>Welcome, please enter in some user information and some information on yourself!  May this website help you!</h1>
+    <br></br>
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-auto">
+                    <input class="form-control mx-auto w-auto" id="height" name="height" placeholder="Height" type="number" required>
+                </div>
+                <div class="col-auto">
+                    <select id="height_unit" name="height_unit" class="form-select">
+                        <option value="in">in</option>
+                        <option value="cm">cm</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-auto">
+                    <input class="form-control mx-auto w-auto" id="weight" name="weight" placeholder="Weight" type="number" required>
+                </div>
+                <div class="col-auto">
+                    <select id="weight_unit" name="weight_unit" class="form-select">
+                        <option value="lbs">lbs</option>
+                        <option value="kg">kg</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="password" name="confirmation" placeholder="Confirmation" type="password">
+        </div>
+        <button class="btn btn-primary" type="submit">Register</button>
+    </form>
+    <br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+{% endblock %}

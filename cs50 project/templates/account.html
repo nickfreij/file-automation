@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Account
+{% endblock %}
+
+{% block main %}
+<br><br><br><br><br>
+
+<img src="/static/account.png" id="accountpic">
+
+{% if not change_request %}
+{% if acct_info %}
+<div>Username: {{acct_info[0]['username']}}</div>
+<div>Height:  {{acct_info[0]['height']}} {{acct_info[0]['height_unit']}}</div>
+<div>Weight:  {{acct_info[0]['weight']}} {{acct_info[0]['weight_unit']}}</div>
+<br><br><br>
+<form action = "/accountchange" method = "get">
+  <button name="change_request" type="submit">Change Account Info</button>
+</form>
+{% endif %}
+{% endif %}
+
+{% if change_request %}
+<form action = "/account" method = "post">
+<div class="mb-3">
+  <div class="row justify-content-center align-items-center">
+      <div class="col-auto">
+          <input class="form-control mx-auto w-auto" id="height" name="height" placeholder="Change Height" type="number">
+      </div>
+      <div class="col-auto">
+          <select id="height_unit" name="height_unit" class="form-select">
+              <option value="in">in</option>
+              <option value="cm">cm</option>
+          </select>
+      </div>
+  </div>
+</div>
+<div class="mb-3">
+  <div class="row justify-content-center align-items-center">
+      <div class="col-auto">
+          <input class="form-control mx-auto w-auto" id="weight" name="weight" placeholder="Change Weight" type="number">
+      </div>
+      <div class="col-auto">
+          <select id="weight_unit" name="weight_unit" class="form-select">
+              <option value="lbs">lbs</option>
+              <option value="kg">kg</option>
+          </select>
+      </div>
+  </div>
+</div>
+<button type="submit">Submit</button>
+</form>
+
+<form action="/accountpassword" method = "get">
+    <br><br><br>
+<button type="submit" name="change_password">Change Password</button>
+</form>
+{% endif %}
+
+{% if change_password %}
+<form action="/account" method = "post">
+<div class="mb-3">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-auto">
+            <input class="form-control mx-auto w-auto" id="currentpw" name="currentpw" placeholder="Current Password" type="password" required>
+        </div>
+    </div>
+  </div>
+
+<div class="mb-3">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-auto">
+            <input class="form-control mx-auto w-auto" id="newpw1" name="newpw1" placeholder="New Password" type="password" required>
+        </div>
+    </div>
+</div>
+
+<div class="mb-3">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-auto">
+            <input class="form-control mx-auto w-auto" id="newpw2" name="newpw2" placeholder="Confirm New Password" type="password" required>
+        </div>
+    </div>
+</div>
+<button type="submit">Submit</button>
+</form>
+{% endif %}
+{% endblock %}
