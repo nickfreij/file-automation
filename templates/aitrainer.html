@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    AI Trainer
+{% endblock %}
+
+{% block main %}
+
+<img src="/static/aitrainer.png" id="aitrainerpic">
+
+<form action = "/aitrainer" method = "post">
+    <h1>Ask a question to the AI Trainer</h1>
+    <br><br><br>
+    <input id = "aiquestion" name = "aiquestion" placeholder = "How can I help?" type = "text" required>
+    <button type = "submit">Ask</button>
+</form>
+
+<br><br><br>
+
+{% if gptresponse %}
+<div class="gptresponse" id="aitraineranswer">{{ gptresponse.choices[0].text }}</div>
+{% endif %}
+
+{% endblock %}
