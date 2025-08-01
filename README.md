@@ -18,4 +18,4 @@ I debated whether I should make more html templates or find a way to incorporate
 I have a venv folder for all the plugins for my project. Please make sure to activate the virtual environment before doing flask run in order to run the code:   source bin/venv/activate
 
 
-I used Github Desktop in order to add the venv folder as well as some big files that couldn't be zipped.  It caused my gradebook to read 10/11 completed even though last submission it showed 11/11.  I am resubmitting and hoping it goes through, hence the changes to the README here. Thank you for reading, and thank you for this course!!!
+I used Github Desktop in order to add the venv folder as well as some big files that couldn't be zipped.  
