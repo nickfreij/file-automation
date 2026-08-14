@@ -1,7 +1,7 @@
 # sirnickGetFit Fitness Web Application
 #### Video Demo: https://youtu.be/lC_-vUuiwM8
 #### Description:
-This fitness website give you access to the following: creating an accountchanging your height, weight, or password after creating an account, access the power of Chat GPT to ask questions on supplements, use Chat GPT to also act as your personal AI trainer, search for foods and log your nutrition into the website under meals to track progress
+This fitness website gives you access to the following: creating an account, changing your height, weight, or password after creating an account, access the power of Chat GPT to ask questions on supplements, use Chat GPT to also act as your personal AI trainer, search for foods and log your nutrition into the website under meals to track progress
 
 In the static folder, all of the backgrounds for each page is stored, including the video in the home screen, labeled kevin.mp4. Additionally, the dumbbell picture, which is the icon on the website tab, is stored here.  Lastly, the apikey.txt is also stored.  This is a txt file for the purpose of remembering what the Chat GPT API key is.
 
